@@ -105,13 +105,13 @@ if __name__ =='__main__':
     # export_inference_graph.py under model directory, see `models/research/object_detection/`
     model_name = op.join(os.getcwd(), FLAGS.model_name)
     # Path to frozen detection graph.
-    path_to_ckpt = op.join(model_name,  '/content/models/research/fine_tuned_model/frozen_inference_graph.pb')
+    path_to_ckpt = op.join(model_name,  'frozen_inference_graph.pb')
     # Path to the label file
-    path_to_label = op.join(os.getcwd(), '/content/Object_Detection-with-custom_data/data/annotations/label_map.pbtxt')
+    path_to_label = op.join(os.getcwd(), 'label_map.pbtxt')
     #only train on buildings
     num_classes = 2
     #Directory to test images path
-    test_image_path = op.join(os.getcwd(), '/content/Object_Detection-with-custom_data/test')
+    test_image_path = op.join(os.getcwd(), 'test')
     test_imgs = glob.glob(test_image_path + "/*.JPG")
     #print(test_imgs)
     ############
@@ -121,7 +121,7 @@ if __name__ =='__main__':
     detection_graph = tf.Graph()
     with detection_graph.as_default():
         od_graph_def = tf.GraphDef()
-        with tf.io.gfile.GFile('/content/models/research/fine_tuned_model/frozen_inference_graph.pb', 'rb') as fid:
+        with tf.io.gfile.GFile('frozen_inference_graph.pb', 'rb') as fid:
             serialized_graph = fid.read()
             od_graph_def.ParseFromString(serialized_graph)
             tf.import_graph_def(od_graph_def, name='')
@@ -129,7 +129,7 @@ if __name__ =='__main__':
     ############
     #Load the label file
     #############
-    label_map = label_map_util.load_labelmap('/content/Object_Detection-with-custom_data/data/annotations/label_map.pbtxt')
+    label_map = label_map_util.load_labelmap('label_map.pbtxt')
     categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=num_classes, use_display_name=True)
     category_index = label_map_util.create_category_index(categories)
     tf_od_pred()

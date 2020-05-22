@@ -4,20 +4,53 @@
 `pip3 install -r requirements.txt`
 
 
-### Step 1: Annotate some images
-- Save some photos with your custom object(s), ideally with `jpg` extension to `./data/raw` directory. (If your objects are simple like ones come with this repo, 20 images can be enough.)
-- Resize those photo to uniformed size.
+
+### Data Preperation
+- I preapred data from script where i used method to fimd  xmin, xmax, ymin, and ymax using this formula
+
 ```
-python resize_images.py --raw-dir ./data/raw --save-dir ./data/images --ext jpg 
+x = xmin
+y = ymin
+w = xmax - xmin
+h = ymax - ymin
+
 ```
-Resized images locate in `./data/images/`
-- Train/test split those files into two directories, `./data/images/train` and `./data/images/test`
 
-- Annotate resized images with [labelImg](https://tzutalin.github.io/labelImg/), generate `xml` files inside `./data/images/train` and `./data/images/test` folders. 
+### detection network
 
-*Tips: use shortcuts (`w`: draw box, `d`: next file, `a`: previous file, etc.) to accelerate the annotation.*
+- I used SSD with tensorflow API
+
+### hyper-parameters for anchor box tuning.
+
+```
+	num_layers: 6
+        min_scale: 0.2
+        max_scale: 0.95
+        aspect_ratios: 1.0
+        aspect_ratios: 2.0
+        aspect_ratios: 0.5
+        aspect_ratios: 3.0
+        aspect_ratios: 0.3333
+```
+        
+###  Traing Notebook
+- training.ipynb in this notebook i traoined model for object dtection where i used tensorflow api with SSD.
 
 
-### Step 2: Open [Colab notebook]
-I already uploaded notebook in my file system
-https://colab.research.google.com/drive/158IKph6ZvAbNTElOxHTgMrKJ4gXdeQjX#scrollTo=Bq_phVcHnfPl
+### Cheaking Result
+
+- run inference.py for count objects in images.
+- After running successful one json file will generate, Where you can see your result.
+
+```
+
+     python inference.py
+
+```
+
+
+
+
+
+
+
