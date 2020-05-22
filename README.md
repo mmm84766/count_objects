@@ -34,7 +34,7 @@ h = ymax - ymin
 ```
         
 ###  Traing Notebook
-- training.ipynb in this notebook i traoined model for object dtection where i used tensorflow api with SSD.
+- (training.ipynb),  in this notebook i trained model for object dtection where i used tensorflow api with SSD.
 
 
 ### Cheaking Result
